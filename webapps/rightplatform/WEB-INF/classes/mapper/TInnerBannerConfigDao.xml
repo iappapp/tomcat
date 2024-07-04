@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinatelecom.rightplatform.dao.TInnerBannerConfigDao">
+  <resultMap id="BaseResultMap" type="com.chinatelecom.rightplatform.model.TInnerBannerConfig">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="href_url" jdbcType="VARCHAR" property="hrefUrl" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="ad_copy" jdbcType="VARCHAR" property="adCopy" />
+    <result column="show_type" jdbcType="INTEGER" property="showType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="extend1" jdbcType="VARCHAR" property="extend1" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, `position`, href_url, img_url, title, ad_copy, show_type, create_time, update_time, 
+    begin_time, end_time, remark, `status`, sort, extend1, extend2, user_type
+  </sql>
+  <select id="selectByExample" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfigExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_inner_banner_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_inner_banner_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_inner_banner_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfigExample">
+    delete from t_inner_banner_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfig" useGeneratedKeys="true">
+    insert into t_inner_banner_config (`position`, href_url, img_url, 
+      title, ad_copy, show_type, 
+      create_time, update_time, begin_time, 
+      end_time, remark, `status`, 
+      sort, extend1, extend2, 
+      user_type)
+    values (#{position,jdbcType=VARCHAR}, #{hrefUrl,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{adCopy,jdbcType=VARCHAR}, #{showType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfig" useGeneratedKeys="true">
+    insert into t_inner_banner_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="position != null">
+        `position`,
+      </if>
+      <if test="hrefUrl != null">
+        href_url,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="adCopy != null">
+        ad_copy,
+      </if>
+      <if test="showType != null">
+        show_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="extend1 != null">
+        extend1,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="hrefUrl != null">
+        #{hrefUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="adCopy != null">
+        #{adCopy,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        #{showType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="extend1 != null">
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfigExample" resultType="java.lang.Long">
+    select count(*) from t_inner_banner_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_inner_banner_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.position != null">
+        `position` = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hrefUrl != null">
+        href_url = #{record.hrefUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrl != null">
+        img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adCopy != null">
+        ad_copy = #{record.adCopy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showType != null">
+        show_type = #{record.showType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.beginTime != null">
+        begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.extend1 != null">
+        extend1 = #{record.extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend2 != null">
+        extend2 = #{record.extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_inner_banner_config
+    set id = #{record.id,jdbcType=BIGINT},
+      `position` = #{record.position,jdbcType=VARCHAR},
+      href_url = #{record.hrefUrl,jdbcType=VARCHAR},
+      img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      ad_copy = #{record.adCopy,jdbcType=VARCHAR},
+      show_type = #{record.showType,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      extend1 = #{record.extend1,jdbcType=VARCHAR},
+      extend2 = #{record.extend2,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfig">
+    update t_inner_banner_config
+    <set>
+      <if test="position != null">
+        `position` = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="hrefUrl != null">
+        href_url = #{hrefUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="adCopy != null">
+        ad_copy = #{adCopy,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        show_type = #{showType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="extend1 != null">
+        extend1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinatelecom.rightplatform.model.TInnerBannerConfig">
+    update t_inner_banner_config
+    set `position` = #{position,jdbcType=VARCHAR},
+      href_url = #{hrefUrl,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      ad_copy = #{adCopy,jdbcType=VARCHAR},
+      show_type = #{showType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      extend1 = #{extend1,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
