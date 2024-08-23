@@ -58,12 +58,10 @@
 
                />
     <Engine name="Catalina" defaultHost="localhost">
-      <Host name="localhost"  appBase="D:\tomcat-8.5.100\web1"
-            unpackWARs="false" autoDeploy="false">
+      <Host name="localhost"  appBase="D:\tomcat-8.5\right"
+            unpackWARs="true" autoDeploy="false">
 
-       <!-- <context path="/rightplatform" docBase="D:\tomcat-8.5.100\rightplatform">
-        </context>-->
-        <context path="/rightplatform" docBase="D:\tomcat-8.5.100\web1\rightplatform">
+        <context path="/rightplatform" docBase="D:\tomcat-8.5\right\rightplatform">
         </context>
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
@@ -79,12 +77,10 @@
 
     />
     <Engine name="Catalina" defaultHost="localhost">
-      <Host name="localhost"  appBase="D:\tomcat-8.5.100\web2"
+      <Host name="localhost"  appBase="D:\tomcat-8.5\interface"
             unpackWARs="false" autoDeploy="false">
 
-       <!-- <context path="/interface5g" docBase="D:\tomcat-8.5.100\interface5g">
-        </context>-->
-        <context path="/interface5g" docBase="D:\tomcat-8.5.100\web2\interface5g">
+        <context path="/interface5g" docBase="D:\tomcat-8.5\interface\interface5g">
         </context>
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
